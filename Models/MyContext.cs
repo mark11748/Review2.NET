@@ -10,7 +10,7 @@ namespace Review2_NET.Models
 
         public DbSet<Product> Products { get; set; }
 
-        public DbSet<Ingredient> Ingredients { get; set; }
+        public DbSet<Review> Reviews { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
