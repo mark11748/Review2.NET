@@ -12,9 +12,9 @@ namespace Review2_NET.Models
 
         public DbSet<Review> Reviews { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder options)
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            options.UseMySql(@"Server=localhost;Port=8889;database=Review1-NET;uid=root;pwd=root;");
+            optionsBuilder.UseMySql(@"Server=localhost;Port=8889;database=Review2-NET;uid=root;pwd=root;");
         }
 
         public MyContext(DbContextOptions<MyContext> options)
@@ -22,9 +22,9 @@ namespace Review2_NET.Models
         {
         }
 
-        protected override void OnModelCreating(ModelBuilder builder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(builder);
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

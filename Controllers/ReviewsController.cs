@@ -19,27 +19,40 @@ namespace Review2NET.Controllers
             return View();
         }
 
-        public IActionResult CreateReview(int productId)
+        public IActionResult Create(int productId)
         {
             var model = db.Products.FirstOrDefaultAsync(product=>product.ProductId==productId);
             return View(model);
         }
+        [HttpPost]
+        public IActionResult Create(Review newReview)
+        {
+            if (string.IsNullOrWhiteSpace(newReview.Author)) { newReview.Author = "Anonymous"; }
+            if (string.IsNullOrWhiteSpace(newReview.Comment)) { newReview.Comment = "N/a"; }
+            db.Reviews.Add(newReview);
+            db.SaveChanges();
+            return View();
+        }
 
         public IActionResult GetReviews(int productId)
         {
-            var model = db.Reviews.Include(review => review.ProductId == productId).ToList();
+            var model = db.Reviews.Where(review => review.ProductId == productId).ToList();
             return View(model);
         }
 
-        public IActionResult DeleteAllReviews()
+        public IActionResult DeleteAll()
         {
             return View();
         }
-        [HttpPost,ActionName("DeleteAllReviews")]
+        [HttpPost,ActionName("DeleteAll")]
         public IActionResult DeleteAllConfirmed()
         {
-            
-            return RedirectToRoute("Products/");
+            foreach (Review review in db.Reviews)
+            {
+                db.Reviews.Remove(review);
+            }
+            db.SaveChanges();
+            return RedirectToAction("Index","Products");
         }
     }
 }
