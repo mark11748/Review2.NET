@@ -4,20 +4,28 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Review2_NET.Models;
+using Review2_NET.Models.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace Review1_NET.Controllers
+namespace Review2_NET.Controllers
 {
     public class ProductsController : Controller
     {
-        private MyContext db = new MyContext();
+        private IProductRepo productRepo;
+
+        public ProductsController(IProductRepo repo = null)
+        {
+            if (repo == null)
+            { this.productRepo = new EFProductRepo(); }
+            else
+            { this.productRepo = repo; }
+        }
         // GET: /<controller>/
         public IActionResult Index()
         {
-            List<Product> myProducts = db.Products.ToList();
-            return View(myProducts);
+            return View(productRepo.Products.ToList());
         }
 
         public IActionResult Create()
@@ -27,39 +35,36 @@ namespace Review1_NET.Controllers
         [HttpPost]
         public IActionResult Create(Product product)
         {
-            db.Products.Add(product);
-            db.SaveChanges();
+            productRepo.Save(product);
             return RedirectToAction("Index");
         }
 
         public IActionResult Update(int id)
         {
-            return View( db.Products.FirstOrDefault(product => product.ProductId == id) );
+            return View( productRepo.Products.FirstOrDefault(product => product.ProductId == id) );
         }
         [HttpPost]
         public IActionResult Update(Product product)
         {
-            db.Entry(product).State = EntityState.Modified;
-            db.SaveChanges();
+            productRepo.Edit(product);
             return RedirectToAction("Index");
         }
 
         public IActionResult Details(int id)
         {
-            Product model = db.Products.FirstOrDefault(product=>product.ProductId==id);
+            Product model = productRepo.Products.FirstOrDefault(product=>product.ProductId==id);
             return View(model);
         }
 
         public IActionResult Delete(int id)
         {
-            return View();
+            return View(productRepo.Products.FirstOrDefault(product=>product.ProductId==id));
         }
         [HttpPost,ActionName("Delete")]
         public IActionResult DeleteConfirmed(int id)
         {
-            var unwantedProduct = db.Products.FirstOrDefault(product=>product.ProductId==id);
-            db.Products.Remove(unwantedProduct);
-            db.SaveChanges();
+            Product unwantedProduct = productRepo.Products.FirstOrDefault(product=>product.ProductId==id);
+            productRepo.Remove(unwantedProduct);
             return RedirectToAction("Index");
         }
     }
