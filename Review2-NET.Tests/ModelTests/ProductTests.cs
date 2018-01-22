@@ -14,6 +14,7 @@ namespace Review2_NET.Tests
     {
         Mock<IProductRepo> mock = new Mock<IProductRepo>();
 
+        [TestInitialize]
         public void DbSetUp()
         {
             mock.Setup(m => m.Products).Returns(new List<Product>
@@ -26,24 +27,16 @@ namespace Review2_NET.Tests
         }
 
       [TestMethod]
-        public void GetAll()
-        {
-            DbSetUp();
-            mock.Products.Get();
-
-        }
-
-      [TestMethod]
         public void GetName()
         {
             var testProduct = new Product("testName1","testDescript1",1);
-            Assert.AreEqual("test1",testProduct.Name);
+            Assert.AreEqual("testName1",testProduct.Name);
         }
         [TestMethod]
         public void GetDescription()
         {
             var testProduct = new Product("testName2", "testDescript2", 2);
-            Assert.AreEqual("test2", testProduct.Description);
+            Assert.AreEqual("testDescript2", testProduct.Description);
         }
         [TestMethod]
         public void GetCost()

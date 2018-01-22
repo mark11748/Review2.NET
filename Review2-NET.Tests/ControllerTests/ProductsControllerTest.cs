@@ -17,6 +17,7 @@ namespace Review2_NET.Tests
     {
         Mock<IProductRepo> mock = new Mock<IProductRepo>();
 
+        [TestInitialize]
         public void DbSetUp()
         {
             mock.Setup(m => m.Products).Returns(new List<Product>
@@ -30,7 +31,6 @@ namespace Review2_NET.Tests
         [TestMethod]
         public void IndexTest_returnActionResult()
         {
-            DbSetUp();
             ProductsController testController = new ProductsController(mock.Object);
 
             IActionResult result = testController.Index();
@@ -41,7 +41,6 @@ namespace Review2_NET.Tests
         [TestMethod]
         public void IndexTest_testViewModel()
         {
-            DbSetUp();
             ProductsController testController = new ProductsController(mock.Object);
 
             ViewResult indexView = testController.Index() as ViewResult;
@@ -53,7 +52,6 @@ namespace Review2_NET.Tests
         [TestMethod]
         public void DetailsTest_returnActionResult()
         {
-            DbSetUp();
             ProductsController testController = new ProductsController(mock.Object);
 
             IActionResult details1 = testController.Details(0);
@@ -68,7 +66,6 @@ namespace Review2_NET.Tests
         [TestMethod]
         public void DetailsTest_correctInfo()
         {
-            DbSetUp();
             ProductsController testController = new ProductsController(mock.Object);
 
             ViewResult infoView1 = testController.Details(0) as ViewResult;

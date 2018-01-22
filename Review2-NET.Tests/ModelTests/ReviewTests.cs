@@ -11,15 +11,15 @@ namespace Review2_NET.Tests
         public void GetAuthor()
         {
             var testReview = new Review();
-            testReview.Author = "test1";
-            Assert.AreEqual("test1", testReview.Author);
+            testReview.Author = "testAuthor1";
+            Assert.AreEqual("testAuthor1", testReview.Author);
         }
         [TestMethod]
         public void GetComment()
         {
             var testReview = new Review();
-            testReview.Comment = "test2";
-            Assert.AreEqual("test2", testReview.Comment);
+            testReview.Comment = "testComment2";
+            Assert.AreEqual("testComment2", testReview.Comment);
         }
         [TestMethod]
         public void GetRating()
