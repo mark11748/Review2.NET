@@ -49,5 +49,43 @@ namespace Review2_NET.Tests
 
             Assert.IsInstanceOfType(products, typeof(List<Product>));
         }
+
+        [TestMethod]
+        public void DetailsTest_returnActionResult()
+        {
+            DbSetUp();
+            ProductsController testController = new ProductsController(mock.Object);
+
+            IActionResult details1 = testController.Details(0);
+            IActionResult details2 = testController.Details(1);
+            IActionResult details3 = testController.Details(2);
+
+            Assert.IsInstanceOfType(details1, typeof(ActionResult));
+            Assert.IsInstanceOfType(details2, typeof(ActionResult));
+            Assert.IsInstanceOfType(details3, typeof(ActionResult));
+        }
+
+        [TestMethod]
+        public void DetailsTest_correctInfo()
+        {
+            DbSetUp();
+            ProductsController testController = new ProductsController(mock.Object);
+
+            ViewResult infoView1 = testController.Details(0) as ViewResult;
+            Product details1 = infoView1.ViewData.Model as Product;
+            ViewResult infoView2 = testController.Details(1) as ViewResult;
+            Product details2 = infoView1.ViewData.Model as Product;
+            ViewResult infoView3 = testController.Details(2) as ViewResult;
+            Product details3 = infoView1.ViewData.Model as Product;
+
+            Assert.AreEqual(details1.Name, "testName1");
+            Assert.AreEqual(details1.Cost, 999);
+            Assert.AreEqual(details2.Name, "testName2");
+            Assert.AreEqual(details2.Cost, 1);
+            Assert.AreEqual(details3.Name, "testName3");
+            Assert.AreEqual(details3.Cost, 25);
+        }
+
+
     }
 }

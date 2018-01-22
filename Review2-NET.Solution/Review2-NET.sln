@@ -1,0 +1,28 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2017
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Review2-NET", "Review2-NET.csproj", "{ADEDCC74-D9E5-4FE4-B608-E261EE2A12A8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Review2-NET.Tests", "..\Review2-NET.Tests\Review2-NET.Tests.csproj", "{F9D9056A-B450-491B-89A3-7355FFF5CDBE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ADEDCC74-D9E5-4FE4-B608-E261EE2A12A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADEDCC74-D9E5-4FE4-B608-E261EE2A12A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADEDCC74-D9E5-4FE4-B608-E261EE2A12A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADEDCC74-D9E5-4FE4-B608-E261EE2A12A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9D9056A-B450-491B-89A3-7355FFF5CDBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9D9056A-B450-491B-89A3-7355FFF5CDBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9D9056A-B450-491B-89A3-7355FFF5CDBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9D9056A-B450-491B-89A3-7355FFF5CDBE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		BaseDirectory = .
+	EndGlobalSection
+EndGlobal
