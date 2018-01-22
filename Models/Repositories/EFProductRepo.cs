@@ -11,21 +11,26 @@ namespace Review2_NET.Models.Repositories
     {
         private MyContext db = new MyContext();
 
-        public IQueryable<Product> Products => throw new NotImplementedException();
+        public IQueryable<Product> Products { get { return db.Products; } }
 
         public Product Edit(Product product)
         {
-            throw new NotImplementedException();
+            db.Entry(product).State = EntityState.Modified;
+            db.SaveChanges();
+            return product;
         }
 
         public void Remove(Product product)
         {
-            throw new NotImplementedException();
+            db.Products.Remove(product);
+            db.SaveChanges();
         }
 
         public Product Save(Product product)
         {
-            throw new NotImplementedException();
+            db.Products.Add(product);
+            db.SaveChanges();
+            return product;
         }
     }
 }

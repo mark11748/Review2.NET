@@ -13,9 +13,5 @@ namespace Review2_NET.Models
         public string Name { get; set; }
         public int Cost { get; set; }
         public string Description { get; set; }
-        //public virtual ICollection<Ingredient> Ingredients { get; set; }
-     
-        private MyContext db = new MyContext();
-
     }
 }

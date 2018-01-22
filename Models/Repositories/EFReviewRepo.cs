@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Review2_NET.Models;
@@ -9,21 +11,26 @@ namespace Review2_NET.Models.Repositories
     {
         private MyContext db = new MyContext();
 
-        public IQueryable<Review> Reviews => throw new System.NotImplementedException();
+        public IQueryable<Review> Reviews { get { return db.Reviews; } }
 
         public Review Edit(Review review)
         {
-            throw new System.NotImplementedException();
+            db.Entry(review).State = EntityState.Modified;
+            db.SaveChanges();
+            return review;
         }
 
         public void Remove(Review review)
         {
-            throw new System.NotImplementedException();
+            db.Reviews.Remove(review);
+            db.SaveChanges();   
         }
 
         public Review Save(Review review)
         {
-            throw new System.NotImplementedException();
+            db.Reviews.Add(review);
+            db.SaveChanges();
+            return review;
         }
     }
 }
