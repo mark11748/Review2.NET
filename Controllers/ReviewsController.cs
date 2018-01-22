@@ -27,9 +27,9 @@ namespace Review2NET.Controllers
             return View();
         }
 
-        public IActionResult Create(int reviewId)
+        public IActionResult Create(int productId)
         {
-            var model = db.Products.FirstOrDefaultAsync(product=>product.ProductId==productId);
+            var model = productId;
             return View(model);
         }
         [HttpPost]
@@ -37,14 +37,13 @@ namespace Review2NET.Controllers
         {
             if (string.IsNullOrWhiteSpace(newReview.Author )) { newReview.Author = "Anonymous"; }
             if (string.IsNullOrWhiteSpace(newReview.Comment)) { newReview.Comment = "N/a"; }
-            db.Reviews.Add(newReview);
-            db.SaveChanges();
-            return View();
+            reviewRepo.Save(newReview);
+            return RedirectToAction("Index","Products");
         }
 
-        public IActionResult GetReviews(int reviewId)
+        public IActionResult GetReviews(int productId)
         {
-            var model = db.Reviews.Where(review => review.ProductId == productId).ToList();
+            var model = reviewRepo.Reviews.Where(review => review.ProductId == productId).ToList();
             return View(model);
         }
 
@@ -55,11 +54,10 @@ namespace Review2NET.Controllers
         [HttpPost,ActionName("DeleteAll")]
         public IActionResult DeleteAllConfirmed()
         {
-            foreach (Review review in db.Reviews)
+            foreach (Review review in reviewRepo.Reviews)
             {
-                db.Reviews.Remove(review);
+                reviewRepo.Remove(review);
             }
-            db.SaveChanges();
             return RedirectToAction("Index","Products");
         }
     }
