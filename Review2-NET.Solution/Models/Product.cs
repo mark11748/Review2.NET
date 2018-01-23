@@ -40,6 +40,7 @@ namespace Review2_NET.Models
                 counter++;
                 avg += review.Rating;
             }
+            avg = avg / counter;
             return avg;
         }
     }

@@ -1,7 +1,6 @@
 ﻿@{Layout="_Layout";}
 @model IEnumerable<Review2_NET.Models.Review>
 @{
-  var net=0;
   var counter=0;
  }
 
@@ -18,12 +17,10 @@
         </li>
         <br>
         counter++;
-        net = net+review.Rating;
     }
 </ul>
 @if(counter!=0)
 { 
-    var avg=net/counter;
-    <p>AVERAGE RATING: @avg </p> 
+    <p>AVERAGE RATING: @ViewBag.avg </p> 
 }
 

@@ -24,6 +24,13 @@ namespace Review2_NET.Models
             this.Comment = comment;
             this.Rating = rating;
         }
+        public Review(string author, string comment, int rating, int productId)
+        {
+            this.Author = author;
+            this.Comment = comment;
+            this.Rating = rating;
+            this.ProductId = productId;
+        }
 
 
         public override bool Equals(System.Object obj)

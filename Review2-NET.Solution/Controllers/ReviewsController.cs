@@ -48,6 +48,8 @@ namespace Review2_NET.Controllers
         public IActionResult ProductReviews(int productId)
         {
             var model = reviewRepo.Reviews.Where(review => review.ProductId == productId).ToList();
+            Product dummy = new Product();
+            ViewBag.avg = dummy.GetAvgRating(model);
             return View(model);
         }
 
