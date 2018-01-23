@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace Review2NET.Controllers
+namespace Review2_NET.Controllers
 {
     public class ReviewsController : Controller
     {
@@ -29,7 +29,8 @@ namespace Review2NET.Controllers
 
         public IActionResult Create(int productId)
         {
-            var model = productId;
+            var model = new Review();
+            model.ProductId=productId;
             return View(model);
         }
         [HttpPost]
@@ -41,23 +42,22 @@ namespace Review2NET.Controllers
             return RedirectToAction("Index","Products");
         }
 
-        public IActionResult GetReviews(int productId)
+        public IActionResult ProductReviews(int reviewId)
         {
-            var model = reviewRepo.Reviews.Where(review => review.ProductId == productId).ToList();
+            var model = reviewRepo.Reviews.Where(review => review.ReviewId == reviewId).ToList();
             return View(model);
         }
 
-        public IActionResult DeleteAll()
+        public IActionResult Delete(int reviewId)
         {
-            return View();
+            Review model = reviewRepo.Reviews.FirstOrDefault(review => review.ReviewId == reviewId);
+            return View(model);
         }
-        [HttpPost,ActionName("DeleteAll")]
-        public IActionResult DeleteAllConfirmed()
+        [HttpPost,ActionName("Delete")]
+        public IActionResult DeleteAllConfirmed(int reviewId)
         {
-            foreach (Review review in reviewRepo.Reviews)
-            {
-                reviewRepo.Remove(review);
-            }
+            Review unwantedReview = reviewRepo.Reviews.FirstOrDefault(review => review.ReviewId == reviewId);
+            reviewRepo.Remove(unwantedReview);
             return RedirectToAction("Index","Products");
         }
     }

@@ -1,0 +1,20 @@
+﻿@{Layout="_Layout";}
+@model Review2_NET.Models.Review
+
+<h4>--ADD REVIEW--</h4>
+@using(Html.BeginForm())
+{    
+    @Html.LabelFor(model=>model.Author)
+    @Html.TextBoxFor(model=>model.Author)
+
+    @Html.LabelFor(model=>model.Comment)
+    @Html.TextBoxFor(model=>model.Comment)
+
+    @Html.LabelFor(model=>model.Rating)
+    @Html.TextBoxFor(model=>model.Rating)
+
+   <input type="submit" value="Add new Review">
+
+}
+<br>
+@Html.ActionLink("CANCEL","Index","Products")

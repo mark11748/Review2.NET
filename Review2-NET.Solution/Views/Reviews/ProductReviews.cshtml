@@ -1,0 +1,29 @@
+﻿@{Layout="_Layout";}
+@model IEnumerable<Review2_NET.Models.Review>
+@{
+  var net=0;
+  var counter=0;
+ }
+
+<h4>Reviews:</h4>
+
+<ul>
+    @foreach(var review in Model)
+    {
+        <li>
+            <p>AUTHOR : @Html.DisplayFor(model=>review.Author)</p>
+            <p>COMMENT: @Html.DisplayFor(model=>review.Comment)</p>
+            <p>RATING : @Html.DisplayFor(model=>review.Rating)</p>
+            <p>@Html.ActionLink("REMOVE","Delete","Reviews",new {reviewId=review.ReviewId})</p>
+        </li>
+        <br>
+        counter++;
+        net = net+review.Rating;
+    }
+</ul>
+@if(counter!=0)
+{ 
+    var avg=net/counter;
+    <p>AVERAGE RATING: @avg </p> 
+}
+

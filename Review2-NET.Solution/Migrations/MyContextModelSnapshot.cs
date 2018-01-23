@@ -15,16 +15,6 @@ namespace Review_2NET.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2");
 
-            modelBuilder.Entity("Review2_NET.Models.Ingredient", b =>
-                {
-                    b.Property<int>("IngredientId")
-                        .ValueGeneratedOnAdd();
-
-                    b.HasKey("IngredientId");
-
-                    b.ToTable("Ingredients");
-                });
-
             modelBuilder.Entity("Review2_NET.Models.Product", b =>
                 {
                     b.Property<int>("ProductId")
@@ -39,6 +29,24 @@ namespace Review_2NET.Migrations
                     b.HasKey("ProductId");
 
                     b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("Review2_NET.Models.Review", b =>
+                {
+                    b.Property<int>("ReviewId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Author");
+
+                    b.Property<string>("Comment");
+
+                    b.Property<int>("ProductId");
+
+                    b.Property<int>("Rating");
+
+                    b.HasKey("ReviewId");
+
+                    b.ToTable("Reviews");
                 });
         }
     }

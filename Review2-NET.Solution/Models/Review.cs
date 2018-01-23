@@ -18,6 +18,13 @@ namespace Review2_NET.Models
         public int Rating { get; set; }
 
         public Review() { }
+        public Review(string author,string comment,int rating) 
+        {
+            this.Author = author;
+            this.Comment = comment;
+            this.Rating = rating;
+        }
+
 
         public override bool Equals(System.Object obj)
         {
