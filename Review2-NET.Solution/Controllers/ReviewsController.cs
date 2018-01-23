@@ -38,6 +38,7 @@ namespace Review2_NET.Controllers
         {
             if (string.IsNullOrWhiteSpace(newReview.Author )) { newReview.Author = "Anonymous"; }
             if (string.IsNullOrWhiteSpace(newReview.Comment)) { newReview.Comment = "N/a"; }
+            if (newReview.Comment.Length>255) { newReview.Comment.Substring(0,255); }
             if (newReview.Rating>5) { newReview.Rating = 5; }
             if (newReview.Rating<1) { newReview.Rating = 1; }
 
