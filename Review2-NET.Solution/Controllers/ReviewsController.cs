@@ -38,13 +38,16 @@ namespace Review2_NET.Controllers
         {
             if (string.IsNullOrWhiteSpace(newReview.Author )) { newReview.Author = "Anonymous"; }
             if (string.IsNullOrWhiteSpace(newReview.Comment)) { newReview.Comment = "N/a"; }
+            if (newReview.Rating>5) { newReview.Rating = 5; }
+            if (newReview.Rating<1) { newReview.Rating = 1; }
+
             reviewRepo.Save(newReview);
             return RedirectToAction("Index","Products");
         }
 
-        public IActionResult ProductReviews(int reviewId)
+        public IActionResult ProductReviews(int productId)
         {
-            var model = reviewRepo.Reviews.Where(review => review.ReviewId == reviewId).ToList();
+            var model = reviewRepo.Reviews.Where(review => review.ProductId == productId).ToList();
             return View(model);
         }
 
